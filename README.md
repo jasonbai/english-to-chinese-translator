@@ -190,6 +190,48 @@ The **unprecedented** pace of technological advancement has **precipitated** a *
 
 **学习需要挑战** — 提供大学水平的语法解析和学习策略，挑战学习者向更高水平迈进。
 
+## 最佳实践
+
+### 💡 推荐工作流：Obsidian + Claudian
+
+这个技能与 **Obsidian** 笔记软件 + **Claudian** 插件搭配使用效果最佳！
+
+**为什么推荐这个组合？**
+
+- **无缝整合**：直接在 Obsidian 中调用本技能，无需切换应用
+- **知识积累**：将生成的学习文档永久保存在你的知识库中
+- **可追溯性**：所有翻译和词汇笔记都可搜索、可链接、可复用
+- **个性化学习**：构建专属的雅思学习知识图谱
+
+**使用流程：**
+
+1. **保存英文材料**：在 Obsidian 中创建笔记，保存想要学习的英文文章
+2. **调用技能**：使用 Claudian 插件调用 `/english-to-chinese-translator` 技能
+3. **生成学习文档**：技能会自动生成包含翻译、词汇拓展、语法解析的完整学习文档
+4. **复习巩固**：利用 Obsidian 的标签、链接和搜索功能进行复习
+5. **知识网络**：将相关词汇和语法概念链接，形成知识网络
+
+**示例 Obsidian 工作流：**
+
+```
+# 雅思学习/技术发展文章.md
+
+## 原文
+[保存的英文文章内容]
+
+## 技能处理
+/english-to-chinese-translator 请翻译上述文章
+
+## 学习笔记
+[技能生成的完整学习文档]
+
+---
+标签: #雅思 #Band6+词汇 #技术话题 #待复习
+```
+
+**获取 Claudian：**
+Claudian 是一个 Obsidian 插件，让你在 Obsidian 中直接使用 Claude Code。访问 [Claudian](https://github.com/YishenTu/claudian) 了解安装和使用方法。
+
 ## 适用场景
 
 - 雅思备考（目标 Band 6.5-8.0）
