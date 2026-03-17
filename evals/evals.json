@@ -1,0 +1,23 @@
+{
+  "skill_name": "english-to-chinese-translator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Please translate this English article to Chinese: 'Technology has transformed the way we communicate. Social media platforms enable people to connect instantly across the globe. However, excessive screen time can lead to health problems and reduced face-to-face interactions.'",
+      "expected_output": "A formatted translation with paragraph-by-paragraph comparison, highlighted IELTS Band 4+ vocabulary in bold, pronunciation markings for linking sounds and weak forms, vocabulary expansion section with definitions and example sentences, and learning materials suitable for IELTS Band 5 learners.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Can you help me understand this English text for IELTS preparation? 'Environmental sustainability is becoming increasingly important. Many countries are implementing policies to reduce carbon emissions and promote renewable energy sources.'",
+      "expected_output": "A translation with side-by-side English and Chinese, advanced vocabulary (sustainability, implementing, emissions, renewable) highlighted with bold text, pronunciation guides for connected speech features, vocabulary list with IELTS-appropriate definitions and examples, and learning tips for IELTS preparation.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Translate this to Chinese with vocabulary notes: 'The rapid advancement of artificial intelligence has revolutionized various industries. Automation has increased efficiency but also raised concerns about job displacement. Nevertheless, AI continues to create new opportunities and transform the workplace.'",
+      "expected_output": "Complete translation output with paragraph comparison, bold highlighting of advanced vocabulary (advancement, artificial intelligence, revolutionized, automation, efficiency, displacement, nevertheless), pronunciation markings, comprehensive vocabulary expansion with IELTS Band 4+ words, grammar notes suitable for intermediate learners, and IELTS preparation tips.",
+      "files": []
+    }
+  ]
+}
