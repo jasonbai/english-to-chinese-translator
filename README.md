@@ -1,115 +1,173 @@
 # English-to-Chinese Translator
 
-一个专为雅思学习者设计的 Claude Code 技能，提供逐段对照的英译中翻译，并高亮标记 IELTS Band 6+ 高级词汇，同时提供全面的词汇拓展和学习材料。
+一个专为雅思学习者设计的 Claude Code 技能，提供逐段对照的英译中翻译，高亮标记 IELTS Band 6+ 高级词汇，并提供词汇拓展和语法解析。
 
 ## 功能介绍
-
-这个技能帮助准备雅思考试的学习者深入理解复杂的英文文章，同时构建高级词汇储备和掌握复杂语法结构。它的目标受众是雅思目标分数 Band 6+ 的学习者。
 
 **核心功能：**
 
 - **逐段对照翻译** — 英文原文与中文翻译逐段对照展示
-- **高级词汇高亮** — 仅标记 IELTS Band 6+ 级别的高级词汇（粗体或红色）
-- **详尽词汇拓展** — 提供词性、定义、例句、发音、搭配、同义词和使用说明
-- **高级学习材料** — 包含针对 Band 6+ 学习者的深度语法解析和学习策略
-- **雅思专项指导** — 针对听说读写四项的 Band 7+ 备考建议
+- **高级词汇高亮** — 仅标记 IELTS Band 6+ 级别的高级词汇（粗体）
+- **详尽词汇拓展** — 提供词性、定义、例句、发音、搭配、同义词和雅思应用
+- **语法精讲** — 2-3个核心语法结构解析，含仿写练习
+- **参数化支持** — 支持自定义学习级别、重点和输出风格
+- **长文本处理** — 自动分块并行处理 3000+ 词文章
 
-## 核心特点
+## 目录结构
 
-**精准的词汇分层**
-- 仅标记真正的 Band 6+ (CEFR C1) 级别词汇
-- 区分学术/专业词汇与基础词汇
-- 专注于在雅思阅读 Passage 3、写作高分范文和口语 Part 3 中常见的高频高级词汇
-
-**学术级语法解析**
-- 大学水平的语法深度分析
-- 不仅解释"是什么"，更解释"为什么"和"何时用"
-- 提供常见错误及避免方法
-
-**产出性学习导向**
-- 不只关注理解，更关注运用
-- 提供将高级词汇应用到雅思写作和口语的策略
-- 培养批判性思维和多角度分析能力
-
-**零依赖**
-- 纯文本技能，无需外部工具或库
-- 可直接集成到 Claude Code 工作流
+```
+english-to-chinese-translator/
+├── SKILL.md                          # 主技能文件
+├── README.md                         # 使用说明
+└── references/                       # 参考资料目录
+    ├── ielts-vocabulary-levels.md    # IELTS词汇分级指南
+    ├── examples.md                   # 处理示例
+    └── subagent-prompt-template.md   # 长文本分块模板
+```
 
 ## 安装
 
-对于 Claude Code 用户
-
-将技能文件复制到你的 Claude Code 技能目录：
+### 方法一：复制到技能目录
 
 ```bash
 # 创建技能目录
 mkdir -p ~/.claude/skills/english-to-chinese-translator
 
-# 复制技能文件
-cp SKILL.md ~/.claude/skills/english-to-chinese-translator/
+# 复制所有文件
+cp -r ./* ~/.claude/skills/english-to-chinese-translator/
 ```
 
-或直接克隆此仓库：
+### 方法二：克隆仓库
 
 ```bash
-git clone https://github.com/你的用户名/english-to-chinese-translator.git ~/.claude/skills/english-to-chinese-translator
+git clone https://github.com/jasonbai/english-to-chinese-translator.git ~/.claude/skills/english-to-chinese-translator
 ```
-
-然后在 Claude Code 中输入 `/english-to-chinese-translator` 即可使用。
 
 ## 使用方法
 
-### 翻译英文文章
+### 基本用法
 
 ```
 /english-to-chinese-translator
 
-> "请帮我翻译这篇关于人工智能的文章，并标注高级词汇"
+> 请帮我翻译这篇关于人工智能的文章
 ```
 
-技能将：
-
-1. 逐段翻译，展示英文原文和中文翻译
-2. 高亮标记 IELTS Band 6+ 级别的词汇
-3. 提供完整的词汇拓展（定义、例句、搭配等）
-4. 解析相关的高级语法点
-5. 提供针对性的雅思备考建议
-
-### 词汇学习
+### 参数化调用
 
 ```
-/english-to-chinese-translator
-
-> "这段文章中有哪些雅思 Band 7+ 词汇？帮我详细解析"
+/english-to-chinese-translator --level band7 --focus vocabulary --style detailed
 ```
 
-技能将：
+## 参数说明
 
-- 提取并解析所有 Band 6+ 级别词汇
-- 提供每个词汇的详细用法说明
-- 给出真实语境下的例句
-- 展示在雅思考试中的应用场景
+| 参数 | 值 | 默认值 | 说明 |
+|------|-----|--------|------|
+| `--level` | `band6`, `band7`, `band8` | `band7` | 目标分数，影响词汇筛选严格度 |
+| `--focus` | `vocabulary`, `grammar`, `both` | `both` | 学习重点 |
+| `--style` | `detailed`, `concise`, `academic` | `detailed` | 输出风格 |
 
-### 写作提升
+### `--level` 词汇分级
+
+- **band6**: 高亮 Band 6+ 词汇，语法解释更基础
+- **band7**: 仅高亮 Band 7+ 词汇（默认）
+- **band8**: 仅高亮 Band 8+ 词汇（最严格）
+
+### `--focus` 学习重点
+
+- **vocabulary**: 扩展词汇部分，简化语法
+- **grammar**: 扩展语法部分，简化词汇
+- **both**: 平衡展示（默认）
+
+### `--style` 输出风格
+
+- **detailed**: 完整格式，多例句（默认）
+- **concise**: 精简格式，表格化词汇
+- **academic**: 学术风格，术语化分析
+
+## 工作流程（三步精简法）
 
 ```
-/english-to-chinese-translator
-
-> "我想提升雅思写作分数，帮我分析这篇文章的高级词汇和语法结构"
+┌─────────────────────────────────────────────────────────────┐
+│  Step 1: 分析与翻译 (Analysis & Translation)                 │
+│  - 识别文章主题、难度                                         │
+│  - 提取 Band 6/7/8+ 候选词汇                                  │
+│  - 逐段英中对照，标记高级词汇                                  │
+├─────────────────────────────────────────────────────────────┤
+│  Step 2: 词汇拓展 (Vocabulary Expansion)                     │
+│  - 详细定义（中英）+ IPA发音 + 词性                            │
+│  - 高分例句 + 中文翻译                                        │
+│  - 搭配 + 同义词 + 雅思应用场景                                │
+├─────────────────────────────────────────────────────────────┤
+│  Step 3: 语法精讲 (Grammar Focus)                            │
+│  - 2-3个核心语法结构解析                                      │
+│  - 原文例句分析 + 仿写练习                                     │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-技能将：
+## 长文本处理
 
-- 识别文章中的高分词汇和语法
-- 解释如何在 Writing Task 2 中运用
-- 提供高分句型和表达方式
-- 给出具体的写作建议
+当文本超过 **3000 词**时，自动采用分块并行处理：
+
+1. **分块**：按段落边界分割，每块 2000-3000 词
+2. **并行翻译**：启动 SubAgent 处理各分块
+3. **接缝检查**：确保词汇高亮一致、术语翻译统一
+4. **合并输出**：去重词汇表，保持整体结构
+
+## 输出格式示例
+
+### 文章概览
+
+```markdown
+# [文章标题] - 雅思精读
+
+> **概览**：约 X 词 | Y 个 Band 6+ 词汇 | Z 个语法点 | 难度：Band X
+```
+
+### 翻译对照
+
+```markdown
+### 【Paragraph 1】
+
+**English:**
+The **unprecedented** pace of technological advancement has **precipitated** a **paradigm** shift...
+
+**中文：**
+技术进步前所未有的步伐已经引发了社会运作方式的范式转变...
+```
+
+### 词汇拓展
+
+```markdown
+### 1. unprecedented (adj.)
+- **释义**：空前的，前所未有的
+- **发音**：/ʌnˈpresɪdentɪd/
+- **例句**：The pandemic caused **unprecedented** disruption to global supply chains.
+  > 疫情对全球供应链造成了前所未有的破坏。
+- **搭配**：unprecedented scale, unprecedented times
+- **同义词**：unparalleled, revolutionary
+- **雅思应用**：Writing Task 2 讨论现代趋势时常用
+```
+
+### 语法精讲
+
+```markdown
+### 1. Present Perfect + Causative Verb
+
+**结构**：Subject + has/have + [causative verb] + object
+
+**原文例句**：
+> "The unprecedented pace... has precipitated a paradigm shift..."
+
+**解析**：现在完成时强调过去事件对现在的持续影响
+
+**仿写**：Social media ___ profound changes in interpersonal communication.
+> 答案：has engendered / has precipitated
+```
 
 ## 词汇等级说明
 
 **IELTS Band 6+ (CEFR C1) - 高级学术和专业词汇**
-
-这类词汇是高级学习者需要掌握才能在雅思考试中获得高分的词汇：
 
 - 具有复杂含义和多重细微差别的词汇
 - 复杂的动词、形容词和抽象名词
@@ -117,120 +175,37 @@ git clone https://github.com/你的用户名/english-to-chinese-translator.git ~
 - 常见于雅思阅读 Passage 3、写作高分范文和口语 Part 3 的词汇
 
 **示例词汇：**
-- **unprecedented** (空前的)
-- **precipitate** (促成，加速)
-- **paradigm** (范式)
-- **manifest** (显示，表明)
-- **exacerbate** (加剧，恶化)
+- **unprecedented** (空前的), **precipitate** (促成), **paradigm** (范式)
+- **exacerbate** (加剧), **mitigate** (缓解), **engender** (导致)
+- **ambiguous** (模糊的), **benign** (良性的), **viable** (可行的)
 
 **不会标记的词汇：**
-- 常见词汇 (Band 4-5 / CEFR A2-B2)
-- 基础学术词汇
-- 日常用语
+- 常见词汇 (Band 4-5)
+- 基础学术词汇：analyze, approach, benefit, concept, data, effect, issue, result
+- 常见过渡词：however, therefore, moreover, nevertheless
 
-## 输出格式示例
+## 参考文件
 
-### 翻译部分
-
-```
-【Paragraph 1】
-
-English (Original):
-The **unprecedented** pace of technological advancement has **precipitated** a **paradigm** shift in how societies function.
-
-中文翻译：
-技术进步前所未有的步伐已经引发了社会运作方式的范式转变。
-```
-
-### 词汇拓展部分
-
-```
-## 词汇拓展 (Vocabulary Expansion)
-
-### IELTS Band 6+ Words (CEFR C1 - Advanced)
-
-1. **unprecedented** (adj.)
-   - 中文定义：从未发生过、没有先例的
-   - English Definition: Never done or known before
-   - Example: The pandemic caused unprecedented disruption to global supply chains.
-     疫情对全球供应链造成了前所未有的破坏。
-   - Pronunciation: /ʌnˈpresɪdentɪd/
-   - Collocations: unprecedented scale, unprecedented times
-   - Synonyms: unparalleled, novel, revolutionary
-   - Usage Notes: 常用于雅思写作 Task 2 讨论现代趋势和挑战时
-```
-
-### 学习要点部分
-
-```
-## 学习要点 (Learning Points)
-
-### 雅思高级语法重点
-
-详细的语法规则解释、结构分析、使用场景和雅思应用示例...
-
-### 高级学习策略
-
-词汇内化策略、语法复杂度提升策略、批判性思维培养...
-
-### 雅思高分备考建议
-
-针对 Reading、Writing、Speaking、Listening 四项的 Band 7+ 策略...
-```
-
-## 设计理念
-
-这个技能基于以下信念：
-
-**精确比数量更重要** — 只标记真正的高级词汇，避免学习者被过多信息淹没。
-
-**理解是为了应用** — 不仅帮助理解文章，更要让学习者能够在雅思写作和口语中主动运用这些词汇。
-
-**批判性思维是高分关键** — 雅思 Band 7+ 不只需要语言能力，更需要展示多角度思考和分析的能力。
-
-**学习需要挑战** — 提供大学水平的语法解析和学习策略，挑战学习者向更高水平迈进。
+| 文件 | 内容 |
+|------|------|
+| `references/ielts-vocabulary-levels.md` | Band 6/7/8 词汇分级标准、典型词汇列表、话题词汇、搭配模式 |
+| `references/examples.md` | 短文/中文/长文处理示例、参数变化示例 |
+| `references/subagent-prompt-template.md` | 长文本分块翻译的子代理指令模板 |
 
 ## 最佳实践
 
 ### 💡 推荐工作流：Obsidian + Claudian
 
-这个技能与 **Obsidian** 笔记软件 + **Claudian** 插件搭配使用效果最佳！
-
-**为什么推荐这个组合？**
-
-- **无缝整合**：直接在 Obsidian 中调用本技能，无需切换应用
-- **知识积累**：将生成的学习文档永久保存在你的知识库中
-- **可追溯性**：所有翻译和词汇笔记都可搜索、可链接、可复用
-- **个性化学习**：构建专属的雅思学习知识图谱
+与 **Obsidian** 笔记软件 + **Claudian** 插件搭配使用效果最佳！
 
 **使用流程：**
 
-1. **保存英文材料**：在 Obsidian 中创建笔记，保存想要学习的英文文章
-2. **调用技能**：使用 Claudian 插件调用 `/english-to-chinese-translator` 技能
-3. **生成学习文档**：技能会自动生成包含翻译、词汇拓展、语法解析的完整学习文档
-4. **复习巩固**：利用 Obsidian 的标签、链接和搜索功能进行复习
-5. **知识网络**：将相关词汇和语法概念链接，形成知识网络
+1. 在 Obsidian 中保存想要学习的英文文章
+2. 使用 Claudian 插件调用 `/english-to-chinese-translator` 技能
+3. 技能自动生成包含翻译、词汇拓展、语法解析的学习文档
+4. 利用 Obsidian 的标签、链接功能进行复习
 
-**示例 Obsidian 工作流：**
-
-```
-# 雅思学习/技术发展文章.md
-
-## 原文
-[保存的英文文章内容]
-
-## 技能处理
-/english-to-chinese-translator 请翻译上述文章
-
-## 学习笔记
-[技能生成的完整学习文档]
-
----
-标签: #雅思 #Band6+词汇 #技术话题 #待复习
-```
-
-**获取 Claudian：**
-Claudian 是一个 Obsidian 插件，让你在 Obsidian 中直接使用 Claude Code。访问 [Claudian](https://github.com/YishenTu/claudian) 了解安装和使用方法。
+**获取 Claudian：** [Claudian GitHub](https://github.com/YishenTu/claudian)
 
 ## 适用场景
 
@@ -239,12 +214,24 @@ Claudian 是一个 Obsidian 插件，让你在 Obsidian 中直接使用 Claude C
 - 高级词汇积累
 - 复杂文本阅读理解
 - 学术写作提升
-- 批判性思维训练
 
 ## 系统要求
 
 - Claude Code CLI
-- 无需额外依赖或库
+- 无需额外依赖
+
+## 更新日志
+
+### v2.0 (2026-03)
+- ✨ 新增参数化支持
+- ✨ 新增长文本分块并行处理（3000+ 词）
+- ✨ 新增 references 参考文件目录
+- 🔧 精简工作流为三步法，移除冗余的备考策略章节
+- 🔧 优化输出格式，更清晰的视觉层次
+- 📝 完善词汇分级标准和典型词汇列表
+
+### v1.0
+- 初始版本：逐段翻译、词汇高亮、语法解析
 
 ## 致谢
 
